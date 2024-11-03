@@ -7,27 +7,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #007bff; /* Blue background color */
-            color: white; /* White text color for better contrast */
+            background-color: #0056b3;
+            color: white;
         }
         .hero {
-            background: rgba(0, 123, 255, 0.8); /* Slightly transparent blue background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
             padding: 60px 20px;
+            background: rgba(0, 123, 255, 0.85);
+            border-radius: 10px;
             text-align: center;
         }
         .nav {
             margin-top: 20px;
         }
         .nav-link {
-            font-size: 1.5rem; /* Larger font size */
+            font-size: 1.5rem;
             font-weight: bold;
-            padding: 15px 25px; /* Increased padding for a bigger button look */
-            color: white; /* White text color */
-            transition: background-color 0.3s; /* Smooth transition for hover effect */
+            padding: 15px 25px;
+            color: white;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 8px; /* Скругленные углы */
         }
-        .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
-            border-radius: 5px; /* Rounded corners for hover */
+        .nav-link:hover, .nav-link:focus {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: #007bff;
         }
         .container {
             margin-top: 30px;
@@ -40,8 +48,8 @@
         <p>Your one-stop destination to know more about my work and projects.</p>
     </div>
     <div class="container">
-        <nav class="nav justify-content-center"> <!-- Using justify-content-center to center nav items -->
-
+        <nav class="nav justify-content-center">
+            <a class="nav-link" href="/">Home</a>
             <a class="nav-link" href="/about">About</a>
             <a class="nav-link" href="http://127.0.0.1:8001/portfolios">Portfolio</a>
             <a class="nav-link" href="/contact">Contact</a>
@@ -52,3 +60,4 @@
     </div>
 </body>
 </html>
+
