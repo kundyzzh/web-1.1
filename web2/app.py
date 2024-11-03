@@ -1,48 +1,39 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-from models import db, User, Portfolio
-from werkzeug.security import generate_password_hash, check_password_hash
+# app.py
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-app.config['SECRET_KEY'] = 'your_secret_key'
-db.init_app(app)
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_handler import main_bp
+from fastapi import FastAPI
+import threading
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+# Initialize the Flask app
+flask_app = Flask(__name__)
+flask_app.secret_key = 'your_secret_key'  # Set a secret key for sessions
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
+# Configure the database
+flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'  # You can choose your database here
+flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable track modifications
 
-@app.route('/portfolio')
-def portfolio():
-    portfolios = Portfolio.query.all()
-    return render_template('portfolio.html', portfolios=portfolios)
+# Initialize the database
+db = SQLAlchemy(flask_app)
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
+# Register the blueprint
+flask_app.register_blueprint(main_bp)
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        user = User.query.filter_by(username=username).first()
-        if user and check_password_hash(user.password, password):
-            session['user_id'] = user.id
-            return redirect(url_for('index'))
-        else:
-            return "Invalid credentials"
-    return render_template('login.html')
+# FastAPI integration
+from fastapi_handler import app as fastapi_app
 
-@app.route('/logout')
-def logout():
-    session.pop('user_id', None)
-    return redirect(url_for('index'))
+def run_fastapi():
+    import uvicorn
+    uvicorn.run(fastapi_app, host="127.0.0.1", port=8001)
+
+# Create a function to run the application
+def run_app():
+    with flask_app.app_context():
+        db.create_all()  # Ensure your tables are created
+    flask_app.run(debug=True, port=5000)  # Run the Flask app in debug mode
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)
+    # Start FastAPI in a separate thread
+    threading.Thread(target=run_fastapi, daemon=True).start()
+    run_app()  # Run the Flask app
