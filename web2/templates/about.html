@@ -5,16 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #007bff; /* Blue background color */
+            color: white; /* White text color for better contrast */
+        }
+        .hero {
+            background: rgba(0, 123, 255, 0.8); /* Slightly transparent blue background */
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .nav {
+            justify-content: center; /* Center the nav items */
+            margin-top: 20px;
+        }
+        .nav-link {
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold;
+            padding: 15px 25px; /* Increased padding for a bigger button look */
+            color: white; /* White text color */
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
+        }
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
+            border-radius: 5px; /* Rounded corners for hover */
+        }
+        .container {
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
+    <div class="hero">
         <h1 class="mt-5">About Me</h1>
-        <p>This is a brief description about me and my work.</p>
+        <p>This is a brief description about me and my work. I am passionate about web development and creating beautiful, functional applications.</p>
+    </div>
+    <div class="container">
         <nav class="nav">
             <a class="nav-link" href="/">Home</a>
-            <a class="nav-link" href="/portfolio">Portfolio</a>
+            <a class="nav-link" href="/about">About</a>
+            <a class="nav-link" href="http://127.0.0.1:8001/portfolios">Portfolio</a>
             <a class="nav-link" href="/contact">Contact</a>
             <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/logout">Logout</a>
+            <a class="nav-link" href="/register">Register</a>
         </nav>
     </div>
 </body>
