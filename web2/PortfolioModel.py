@@ -15,8 +15,10 @@ class Portfolio(Base):
     __tablename__ = "portfolios"
 
     id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, index=True)  # User ID
     name = Column(String, index=True)
     description = Column(String)
+    file_path = Column(String, index=True)  # Path to the uploaded file
 
 # Create the database tables
 Base.metadata.create_all(bind=engine)
