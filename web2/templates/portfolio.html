@@ -3,15 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Portfolio Submission</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background color for consistency */
+            color: #343a40; /* Dark text color for better readability */
+            font-family: 'Arial', sans-serif; /* Clean font style */
+        }
+        .hero {
+            background: linear-gradient(120deg, #007bff, #6f42c1); /* Gradient background */
+            padding: 60px 20px;
+            text-align: center;
+            color: white; /* White text color for contrast */
+            border-bottom: 5px solid #ffffff; /* White border at the bottom */
+        }
+        h1 {
+            font-size: 2.5rem; /* Larger heading size */
+            font-weight: bold;
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 600px; /* Limit the width of the container */
+            padding: 30px; /* Increased padding */
+            background-color: #ffffff; /* Solid white background for form container */
+            border-radius: 15px; /* More rounded corners for the form container */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+        }
+        .form-group {
+            margin-bottom: 20px; /* Spacing between form groups */
+        }
+        .form-control {
+            border: 1px solid #007bff; /* Blue border for input fields */
+            border-radius: 5px; /* Rounded corners for inputs */
+        }
+        .form-control:focus {
+            background-color: #ffffff; /* White background on focus */
+            color: #007bff; /* Blue text color */
+            border-color: #6f42c1; /* Darker purple border color on focus */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Blue button color */
+            border-color: #007bff; /* Border color matches button */
+            width: 100%; /* Full width button */
+            padding: 15px; /* Increased padding */
+            font-size: 1.2rem; /* Larger button text */
+            font-weight: bold; /* Bold button text */
+            border-radius: 8px; /* Rounded corners for button */
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            border-color: #0056b3; /* Border color matches hover */
+            transform: translateY(-2px); /* Slight lift effect on hover */
+        }
+        .portfolio-item {
+            border: 1px solid #007bff; /* Blue border for portfolio items */
+            border-radius: 10px; /* Rounded corners */
+            margin-bottom: 15px; /* Spacing between items */
+            padding: 15px; /* Padding inside the items */
+            transition: transform 0.2s; /* Smooth scaling on hover */
+        }
+        .portfolio-item:hover {
+            transform: scale(1.02); /* Slight scale effect on hover */
+        }
+        .nav {
+            justify-content: center; /* Center the nav items */
+            margin-top: 20px;
+            display: flex; /* Make it a flex container */
+            flex-wrap: wrap; /* Allow wrapping if needed */
+        }
+        .nav-link {
+            font-size: 1.1rem; /* Consistent font size */
+            font-weight: bold;
+            padding: 10px 15px; /* Increased padding for a bigger button look */
+            color: #007bff; /* Blue text color */
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
+            margin: 5px; /* Margin between links */
+        }
+        .nav-link:hover {
+            background-color: rgba(0, 123, 255, 0.1); /* Light blue on hover */
+            border-radius: 5px; /* Keep rounded corners on hover */
+        }
+    </style>
 </head>
 <body>
+    <div class="hero">
+        <h1 class="mt-5">Submit Your Portfolio</h1>
+        <p>Fill out the form below to add your portfolio item</p>
+    </div>
     <div class="container">
-        <h1 class="mt-5">My Portfolio</h1>
-        <ul class="list-group">
+        <h2 class="mt-4 text-center">New Portfolio Item</h2>
+        <form action="/portfolios" method="POST">
+    <div class="form-group">
+        <label for="name">Portfolio Name</label>
+        <input type="text" class="form-control" id="name" name="name" required placeholder="Enter the portfolio name">
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="4" required placeholder="Enter a brief description of the portfolio"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+        <h3 class="mt-4 text-center">Your Portfolios</h3>
+        <ul class="list-group mt-4">
             {% for portfolio in portfolios %}
-                <li class="list-group-item">
+                <li class="list-group-item portfolio-item">
                     <h5>{{ portfolio.title }}</h5>
                     <p>{{ portfolio.description }}</p>
                 </li>
@@ -20,8 +119,9 @@
         <nav class="nav">
             <a class="nav-link" href="/">Home</a>
             <a class="nav-link" href="/about">About</a>
+            <a class="nav-link" href="/portfolios">Portfolio</a>
             <a class="nav-link" href="/contact">Contact</a>
-            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/register">Register</a>
         </nav>
     </div>
 </body>
